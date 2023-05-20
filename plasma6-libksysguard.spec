@@ -230,12 +230,12 @@ Development files for the KDE Frameworks 6 system monitoring library.
 %{_libdir}/cmake/KSysGuard
 
 %package -n %{desname}
-Summary: Qt Designer plugin integrating KSysguard's widgets
+Summary: Qt Designer plugin integrating KSysguard widgets
 Group: Development/KDE and Qt
 Requires: %{devname} = %{EVRD}
 
 %description -n %{desname}
-Qt Designer plugin integrating KSysguard's widgets.
+Qt Designer plugin integrating KSysguard widgets.
 
 %files -n %{desname}
 %{_libdir}/qt6/plugins/designer/ksignalplotter5widgets.so
