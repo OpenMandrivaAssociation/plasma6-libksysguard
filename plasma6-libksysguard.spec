@@ -2,23 +2,23 @@
 %define desname %mklibname KF6Libksysguard-designer -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230620
+%define git 20230521
 
-%define ksgrd_major 9
+%define ksgrd_major 10
 %define libksgrd %mklibname ksgrd
-%define ksignalplotter_major 9
+%define ksignalplotter_major 10
 %define libksignalplotter %mklibname ksignalplotter
-%define lsofui_major 9
+%define lsofui_major 10
 %define liblsofui %mklibname lsofui
-%define processcore_major 9
+%define processcore_major 10
 %define libprocesscore %mklibname processcore
-%define processui_major 9
+%define processui_major 10
 %define libprocessui %mklibname processui
-%define formatter_major 1
+%define formatter_major 2
 %define libformatter %mklibname KSysGuardFormatter
-%define sensorfaces_major 1
+%define sensorfaces_major 2
 %define libsensorfaces %mklibname KSysGuardSensorFaces
-%define sensors_major 1
+%define sensors_major 2
 %define libsensors %mklibname KSysGuardSensors
 
 Name: plasma6-libksysguard
@@ -29,6 +29,7 @@ Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/master/libksysguar
 %else
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 %endif
+Patch0:	libksysguard-bump-sonames.patch
 Summary: KDE Frameworks 6 system monitoring framework
 URL: http://kde.org/
 License: GPL
@@ -108,7 +109,7 @@ Plasma 6 KDE System Guard shared library.
 %files -n %{libksgrd}
 %{_libdir}/libksgrd.so.%{ksgrd_major}
 %{_libdir}/libksgrd.so.5*
-%{_libdir}/libKSysGuardSystemStats.so.1
+%{_libdir}/libKSysGuardSystemStats.so.2
 %{_libdir}/libKSysGuardSystemStats.so.5*
 
 #----------------------------------------------------------------------------

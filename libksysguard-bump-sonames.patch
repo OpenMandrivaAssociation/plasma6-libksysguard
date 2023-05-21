@@ -1,0 +1,50 @@
+diff -up libksysguard-master/CMakeLists.txt.omv~ libksysguard-master/CMakeLists.txt
+--- libksysguard-master/CMakeLists.txt.omv~	2023-05-21 17:39:12.893372035 +0200
++++ libksysguard-master/CMakeLists.txt	2023-05-21 17:39:24.249480469 +0200
+@@ -62,7 +62,7 @@ ecm_setup_version(${PROJECT_VERSION}
+                   VARIABLE_PREFIX KSYSGUARD
+                   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/ksysguard_version.h"
+                   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KSysGuardConfigVersion.cmake"
+-                  SOVERSION 9
++                  SOVERSION 10
+ )
+ 
+ option(WITH_X11 "Build with X11 support." ON)
+diff -up libksysguard-master/faces/CMakeLists.txt.omv~ libksysguard-master/faces/CMakeLists.txt
+--- libksysguard-master/faces/CMakeLists.txt.omv~	2023-05-21 17:39:48.246709729 +0200
++++ libksysguard-master/faces/CMakeLists.txt	2023-05-21 17:39:50.896735056 +0200
+@@ -1,4 +1,4 @@
+-set(KSYSGUARD_SENSORS_SOVERSION 1)
++set(KSYSGUARD_SENSORS_SOVERSION 2)
+ 
+ add_definitions(-DTRANSLATION_DOMAIN=\"KSysGuardSensorFaces\")
+ 
+diff -up libksysguard-master/formatter/CMakeLists.txt.omv~ libksysguard-master/formatter/CMakeLists.txt
+--- libksysguard-master/formatter/CMakeLists.txt.omv~	2023-05-21 17:38:27.830942149 +0200
++++ libksysguard-master/formatter/CMakeLists.txt	2023-05-21 17:38:47.466129386 +0200
+@@ -1,5 +1,5 @@
+ 
+-set(Formatter_SOVERSION 1)
++set(Formatter_SOVERSION 2)
+ 
+ set(formatter_SRCS
+     Formatter.cpp
+diff -up libksysguard-master/ksgrd/CMakeLists.txt.omv~ libksysguard-master/ksgrd/CMakeLists.txt
+diff -up libksysguard-master/sensors/CMakeLists.txt.omv~ libksysguard-master/sensors/CMakeLists.txt
+--- libksysguard-master/sensors/CMakeLists.txt.omv~	2023-05-21 17:39:41.039640858 +0200
++++ libksysguard-master/sensors/CMakeLists.txt	2023-05-21 17:39:44.475673691 +0200
+@@ -1,4 +1,4 @@
+-set(KSYSGUARD_SENSORS_SOVERSION 1)
++set(KSYSGUARD_SENSORS_SOVERSION 2)
+ 
+ add_subdirectory(declarative)
+ 
+diff -up libksysguard-master/systemstats/CMakeLists.txt.omv~ libksysguard-master/systemstats/CMakeLists.txt
+--- libksysguard-master/systemstats/CMakeLists.txt.omv~	2023-05-21 17:40:04.000860326 +0200
++++ libksysguard-master/systemstats/CMakeLists.txt	2023-05-21 17:40:05.889878389 +0200
+@@ -1,4 +1,4 @@
+-set(SystemStats_SOVERSION 1)
++set(SystemStats_SOVERSION 2)
+ 
+ set(systemstats_SRCS
+     AggregateSensor.cpp
