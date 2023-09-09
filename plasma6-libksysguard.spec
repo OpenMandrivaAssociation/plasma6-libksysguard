@@ -2,7 +2,7 @@
 %define desname %mklibname KF6Libksysguard-designer -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230901
+%define git 20230909
 
 %define ksgrd_major 10
 %define libksgrd %mklibname ksgrd
@@ -89,7 +89,7 @@ KDE Frameworks 6 system monitoring framework.
 %files -f ksgrd.lang
 %{_datadir}/qlogging-categories6/libksysguard.categories
 %{_datadir}/ksysguard/scripts
-%{_libdir}/libexec/kauth/ksysguardprocesslist_helper
+%{_libdir}/libexec/kf6/kauth/ksysguardprocesslist_helper
 %dir %{_libdir}/libexec/ksysguard
 %caps(cap_net_raw+ep) %{_libdir}/libexec/ksysguard/ksgrd_network_helper
 %{_datadir}/dbus-1/system.d/org.kde.ksysguard.processlisthelper.conf
