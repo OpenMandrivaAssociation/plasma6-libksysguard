@@ -1,8 +1,8 @@
 %define devname %mklibname KF6Libksysguard -d
 %define desname %mklibname KF6Libksysguard-designer -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
-%define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20231103
+%define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
+#define git 20231103
 
 %define ksgrd_major 10
 %define libksgrd %mklibname ksgrd
@@ -22,12 +22,12 @@
 %define libsensors %mklibname KSysGuardSensors
 
 Name: plasma6-libksysguard
-Version:	5.240.0
+Version:	5.27.80
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/master/libksysguard-master.tar.bz2#/libksysguard-%{git}.tar.bz2
 %else
-Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
+Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/libksysguard-%{version}.tar.xz
 %endif
 Patch0:	libksysguard-bump-sonames.patch
 Summary: KDE Frameworks 6 system monitoring framework
