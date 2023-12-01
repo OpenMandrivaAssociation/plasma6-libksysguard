@@ -69,8 +69,6 @@ BuildRequires: pkgconfig(libnl-3.0)
 BuildRequires: pkgconfig(libpcap)
 BuildRequires: pkgconfig(libcap)
 BuildRequires: lm_sensors-devel
-# Prevent pulling in Plasma 5
-BuildRequires: plasma6-xdg-desktop-portal-kde
 
 Requires: kf6-kquickcharts
 Requires: %{libksgrd} = %{EVRD}
