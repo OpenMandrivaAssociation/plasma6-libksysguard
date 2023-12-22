@@ -22,7 +22,7 @@
 %define libsensors %mklibname KSysGuardSensors
 
 Name: plasma6-libksysguard
-Version:	5.90.0
+Version:	5.91.0
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/master/libksysguard-master.tar.bz2#/libksysguard-%{git}.tar.bz2
@@ -85,12 +85,12 @@ KDE Frameworks 6 system monitoring framework.
 
 %files -f ksgrd.lang
 %{_datadir}/qlogging-categories6/libksysguard.categories
+%{_datadir}/dbus-1/interfaces/org.kde.ksystemstats1.xml
 %{_datadir}/ksysguard/scripts
 %{_libdir}/libexec/kf6/kauth/ksysguardprocesslist_helper
 %dir %{_libdir}/libexec/ksysguard
 %caps(cap_net_raw+ep) %{_libdir}/libexec/ksysguard/ksgrd_network_helper
 %{_datadir}/dbus-1/system.d/org.kde.ksysguard.processlisthelper.conf
-%{_datadir}/dbus-1/interfaces/org.kde.ksystemstats.xml
 %{_datadir}/dbus-1/system-services/org.kde.ksysguard.processlisthelper.service
 %{_qtdir}/qml/org/kde/ksysguard
 %{_qtdir}/plugins/kf6/packagestructure/ksysguard_sensorface.so
