@@ -69,6 +69,7 @@ BuildRequires: pkgconfig(libnl-3.0)
 BuildRequires: pkgconfig(libpcap)
 BuildRequires: pkgconfig(libcap)
 BuildRequires: lm_sensors-devel
+BuildRequires: gettext
 
 Requires: kf6-kquickcharts
 Requires: %{libksgrd} = %{EVRD}
