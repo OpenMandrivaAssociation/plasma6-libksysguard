@@ -22,7 +22,7 @@
 %define libsensors %mklibname KSysGuardSensors
 
 Name: plasma6-libksysguard
-Version:	5.92.0
+Version:	5.93.0
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/master/libksysguard-master.tar.bz2#/libksysguard-%{git}.tar.bz2
