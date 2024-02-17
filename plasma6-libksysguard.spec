@@ -2,7 +2,9 @@
 %define desname %mklibname KF6Libksysguard-designer -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-#define git 20231103
+%define git 20240217
+%define gitbranch Plasma/6.0
+%define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 %define ksgrd_major 10
 %define libksgrd %mklibname ksgrd
@@ -22,10 +24,10 @@
 %define libsensors %mklibname KSysGuardSensors
 
 Name: plasma6-libksysguard
-Version:	5.93.0
+Version:	5.94.0
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
-Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/master/libksysguard-master.tar.bz2#/libksysguard-%{git}.tar.bz2
+Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/%{gitbranch}/libksysguard-%{gitbranchd}.tar.bz2#/libksysguard-%{git}.tar.bz2
 %else
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/libksysguard-%{version}.tar.xz
 %endif
@@ -116,9 +118,9 @@ Plasma 6 KDE System Guard shared library.
 
 %files -n %{libksgrd}
 %{_libdir}/libksgrd.so.%{ksgrd_major}
-%{_libdir}/libksgrd.so.5*
+%{_libdir}/libksgrd.so.6*
 %{_libdir}/libKSysGuardSystemStats.so.2
-%{_libdir}/libKSysGuardSystemStats.so.5*
+%{_libdir}/libKSysGuardSystemStats.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -132,7 +134,7 @@ Plasma 6 KDE System Guard shared library.
 
 %files -n %{libksignalplotter}
 %{_libdir}/libksignalplotter.so.%{ksignalplotter_major}
-%{_libdir}/libksignalplotter.so.5*
+%{_libdir}/libksignalplotter.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -146,7 +148,7 @@ Plasma 6 KDE System Guard shared library.
 
 %files -n %{liblsofui}
 %{_libdir}/liblsofui.so.%{lsofui_major}
-%{_libdir}/liblsofui.so.5*
+%{_libdir}/liblsofui.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -160,7 +162,7 @@ Plasma 6 KDE System Guard shared library.
 
 %files -n %{libprocesscore}
 %{_libdir}/libprocesscore.so.%{processcore_major}
-%{_libdir}/libprocesscore.so.5*
+%{_libdir}/libprocesscore.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -174,7 +176,7 @@ Plasma 6 KDE System Guard shared library.
 
 %files -n %{libprocessui}
 %{_libdir}/libprocessui.so.%{processui_major}
-%{_libdir}/libprocessui.so.5*
+%{_libdir}/libprocessui.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -188,7 +190,7 @@ Plasma 6 KDE System Guard formatting shared library.
 
 %files -n %{libformatter}
 %{_libdir}/libKSysGuardFormatter.so.%{formatter_major}
-%{_libdir}/libKSysGuardFormatter.so.5*
+%{_libdir}/libKSysGuardFormatter.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -202,7 +204,7 @@ Plasma 6 KDE System Guard sensor faces shared library.
 
 %files -n %{libsensorfaces}
 %{_libdir}/libKSysGuardSensorFaces.so.%{sensorfaces_major}
-%{_libdir}/libKSysGuardSensorFaces.so.5*
+%{_libdir}/libKSysGuardSensorFaces.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -216,7 +218,7 @@ Plasma 6 KDE System Guard sensors shared library.
 
 %files -n %{libsensors}
 %{_libdir}/libKSysGuardSensors.so.%{sensors_major}
-%{_libdir}/libKSysGuardSensors.so.5*
+%{_libdir}/libKSysGuardSensors.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -254,7 +256,7 @@ Qt Designer plugin integrating KSysguard widgets.
 %{_libdir}/qt6/plugins/designer/ksysguardlsof5widgets.so
 
 %prep
-%autosetup -p1 -n libksysguard-%{?git:master}%{!?git:%{version}}
+%autosetup -p1 -n libksysguard-%{?git:%{gitbranchd}}%{!?git:%{version}}
 %cmake \
 	-DBUILD_QCH:BOOL=ON \
 	-DBUILD_WITH_QT6:BOOL=ON \
