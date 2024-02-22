@@ -1,30 +1,29 @@
 %define devname %mklibname KF6Libksysguard -d
-%define desname %mklibname KF6Libksysguard-designer -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20240217
+%define git 20240222
 %define gitbranch Plasma/6.0
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 %define ksgrd_major 10
-%define libksgrd %mklibname ksgrd
-%define ksignalplotter_major 10
-%define libksignalplotter %mklibname ksignalplotter
-%define lsofui_major 10
-%define liblsofui %mklibname lsofui
+%define libksgrd %mklibname KSysGuardSystemStats
 %define processcore_major 10
 %define libprocesscore %mklibname processcore
-%define processui_major 10
-%define libprocessui %mklibname processui
 %define formatter_major 2
 %define libformatter %mklibname KSysGuardFormatter
 %define sensorfaces_major 2
 %define libsensorfaces %mklibname KSysGuardSensorFaces
 %define sensors_major 2
 %define libsensors %mklibname KSysGuardSensors
+# Removed in 6.0
+%define oldlibksgrd %mklibname ksgrd
+%define libksignalplotter %mklibname ksignalplotter
+%define liblsofui %mklibname lsofui
+%define libprocessui %mklibname processui
+%define desname %mklibname KF6Libksysguard-designer -d
 
 Name: plasma6-libksysguard
-Version:	5.94.0
+Version:	6.0.0
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/%{gitbranch}/libksysguard-%{gitbranchd}.tar.bz2#/libksysguard-%{git}.tar.bz2
@@ -75,13 +74,13 @@ BuildRequires: gettext
 
 Requires: kf6-kquickcharts
 Requires: %{libksgrd} = %{EVRD}
-Requires: %{libksignalplotter} = %{EVRD}
-Requires: %{liblsofui} = %{EVRD}
 Requires: %{libprocesscore} = %{EVRD}
-Requires: %{libprocessui} = %{EVRD}
 Requires: %{libformatter} = %{EVRD}
 Requires: %{libsensorfaces} = %{EVRD}
 Requires: %{libsensors} = %{EVRD}
+Obsoletes: %{libksignalplotter} < %{EVRD}
+Obsoletes: %{liblsofui} < %{EVRD}
+Obsoletes: %{libprocessui} < %{EVRD}
 
 %description
 KDE Frameworks 6 system monitoring framework.
@@ -89,7 +88,6 @@ KDE Frameworks 6 system monitoring framework.
 %files -f ksgrd.lang
 %{_datadir}/qlogging-categories6/libksysguard.categories
 %{_datadir}/dbus-1/interfaces/org.kde.ksystemstats1.xml
-%{_datadir}/ksysguard/scripts
 %{_libdir}/libexec/kf6/kauth/ksysguardprocesslist_helper
 %dir %{_libdir}/libexec/ksysguard
 %caps(cap_net_raw+ep) %{_libdir}/libexec/ksysguard/ksgrd_network_helper
@@ -112,43 +110,14 @@ KDE Frameworks 6 system monitoring framework.
 Summary: Plasma 6 KDE System Guard shared library
 Group: System/Libraries
 Requires: %{name} = %{EVRD}
+%rename %{oldlibksgrd}
 
 %description -n %{libksgrd}
 Plasma 6 KDE System Guard shared library.
 
 %files -n %{libksgrd}
-%{_libdir}/libksgrd.so.%{ksgrd_major}
-%{_libdir}/libksgrd.so.6*
 %{_libdir}/libKSysGuardSystemStats.so.2
 %{_libdir}/libKSysGuardSystemStats.so.6*
-
-#----------------------------------------------------------------------------
-
-%package -n %{libksignalplotter}
-Summary: Plasma 6 KDE System Guard shared library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-
-%description -n %{libksignalplotter}
-Plasma 6 KDE System Guard shared library.
-
-%files -n %{libksignalplotter}
-%{_libdir}/libksignalplotter.so.%{ksignalplotter_major}
-%{_libdir}/libksignalplotter.so.6*
-
-#----------------------------------------------------------------------------
-
-%package -n %{liblsofui}
-Summary: Plasma 6 KDE System Guard shared library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-
-%description -n %{liblsofui}
-Plasma 6 KDE System Guard shared library.
-
-%files -n %{liblsofui}
-%{_libdir}/liblsofui.so.%{lsofui_major}
-%{_libdir}/liblsofui.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -163,20 +132,6 @@ Plasma 6 KDE System Guard shared library.
 %files -n %{libprocesscore}
 %{_libdir}/libprocesscore.so.%{processcore_major}
 %{_libdir}/libprocesscore.so.6*
-
-#----------------------------------------------------------------------------
-
-%package -n %{libprocessui}
-Summary: Plasma 6 KDE System Guard shared library
-Group: System/Libraries
-Requires: %{name} = %{EVRD}
-
-%description -n %{libprocessui}
-Plasma 6 KDE System Guard shared library.
-
-%files -n %{libprocessui}
-%{_libdir}/libprocessui.so.%{processui_major}
-%{_libdir}/libprocessui.so.6*
 
 #----------------------------------------------------------------------------
 
@@ -226,13 +181,11 @@ Plasma 6 KDE System Guard sensors shared library.
 Summary: Development files for the KDE Frameworks 6 system monitoring library
 Group: Development/KDE and Qt
 Requires: %{libksgrd} = %{EVRD}
-Requires: %{libksignalplotter} = %{EVRD}
-Requires: %{liblsofui} = %{EVRD}
 Requires: %{libprocesscore} = %{EVRD}
-Requires: %{libprocessui} = %{EVRD}
 Requires: %{libformatter} = %{EVRD}
 Requires: %{libsensorfaces} = %{EVRD}
 Requires: %{libsensors} = %{EVRD}
+Obsoletes: %{desname} < %{EVRD}
 
 %description -n %{devname}
 Development files for the KDE Frameworks 6 system monitoring library.
@@ -241,19 +194,6 @@ Development files for the KDE Frameworks 6 system monitoring library.
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/cmake/KSysGuard
-
-%package -n %{desname}
-Summary: Qt Designer plugin integrating KSysguard widgets
-Group: Development/KDE and Qt
-Requires: %{devname} = %{EVRD}
-
-%description -n %{desname}
-Qt Designer plugin integrating KSysguard widgets.
-
-%files -n %{desname}
-%{_libdir}/qt6/plugins/designer/ksignalplotter5widgets.so
-%{_libdir}/qt6/plugins/designer/ksysguard5widgets.so
-%{_libdir}/qt6/plugins/designer/ksysguardlsof5widgets.so
 
 %prep
 %autosetup -p1 -n libksysguard-%{?git:%{gitbranchd}}%{!?git:%{version}}
