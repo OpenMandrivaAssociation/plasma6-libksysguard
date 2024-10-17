@@ -31,7 +31,7 @@ Source0:	https://invent.kde.org/plasma/libksysguard/-/archive/%{gitbranch}/libks
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/libksysguard-%{version}.tar.xz
 %endif
 Summary: KDE Frameworks 6 system monitoring framework
-URL: http://kde.org/
+URL: https://kde.org/
 License: GPL
 Group: System/Libraries
 BuildRequires: cmake(Qt6)
